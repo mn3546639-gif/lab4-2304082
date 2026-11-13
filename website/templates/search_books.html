@@ -1,0 +1,11 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Search books</title></head><body>
+<h1>Search books</h1>{% include 'lab4_nav.html' %}
+{% for error in errors %}<p style="color:red">{{ error }}</p>{% endfor %}
+<form method="GET">
+<p><label>Title keyword: <input name="keyword" value="{{ request.args.get('keyword','') }}"></label></p>
+<p><label>Minimum price: <input type="number" min="0" max="99999999.99" step="0.01" name="min_price" value="{{ request.args.get('min_price','') }}"></label></p>
+<p><label>Maximum price: <input type="number" min="0" max="99999999.99" step="0.01" name="max_price" value="{{ request.args.get('max_price','') }}"></label></p>
+<p><label>Category: <select name="category_id"><option value="0">All categories</option>
+{% for category in categories %}<option value="{{ category.category_id }}" {% if request.args.get('category_id','0') == category.category_id|string %}selected{% endif %}>{{ category.name }}</option>{% endfor %}</select></label></p>
+<button type="submit">Search</button> <a href="/library/search">Reset</a></form>
+<h2>Matching books (cheapest first)</h2>{% set rows=books %}{% include 'lab4_table.html' %}</body></html>

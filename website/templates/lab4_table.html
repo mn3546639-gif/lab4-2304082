@@ -1,0 +1,4 @@
+{% if rows %}<div style="overflow-x:auto"><table border="1" cellpadding="8">
+<tr>{% for column in rows[0] %}<th>{{ column.replace('_', ' ').title() }}</th>{% endfor %}</tr>
+{% for row in rows %}<tr>{% for value in row.values() %}<td>{{ value if value is not none else 'N/A' }}</td>{% endfor %}</tr>{% endfor %}
+</table></div>{% else %}<p>No matching records.</p>{% endif %}
